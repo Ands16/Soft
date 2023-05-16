@@ -1,0 +1,162 @@
+Write a program to develop supervised learning algorithm
+
+
+
+
+
+Program:
+
+#include <stdio.h> #include <stdlib.h>
+
+
+
+#define MAX_SIZE 100
+
+
+
+// Activation function (unit step) int unitStep(double x) {
+
+if (x >= 0) { return 1;
+
+} else {
+
+return -1;
+
+}
+
+}
+
+
+
+// Function to calculate the dot product of two vectors
+
+double dotProduct(double inputs[], double weights[], int size) { double result = 0.0;
+
+for (int i = 0; i < size; i++) {
+
+result += inputs[i] * weights[i];
+
+}
+
+return result;
+
+}
+
+
+
+// Function to train the perceptron
+
+void train(double dataset[][MAX_SIZE], int labels[], double weights[], double learningRate, int dataSize, int inputSize, int maxIterations) {
+
+int iteration = 0; int error = 1;
+
+while (iteration < maxIterations && error != 0) { error = 0;
+
+for (int i = 0; i < dataSize; i++) {
+
+double prediction = unitStep(dotProduct(dataset[i], weights, inputSize)); int errorAmount = labels[i] - prediction;
+
+if (errorAmount != 0) { error = 1;
+
+for (int j = 0; j < inputSize; j++) {
+
+weights[j] += learningRate * errorAmount * dataset[i][j];
+
+ 
+
+}
+
+}
+
+}
+
+iteration++;
+
+}
+
+}
+
+
+
+int main() {
+
+int inputSize, dataSize, maxIterations;
+
+
+
+printf("Enter the number of input neurons: "); scanf("%d", &inputSize);
+
+
+
+printf("Enter the number of samples in the dataset: "); scanf("%d", &dataSize);
+
+
+
+double dataset[MAX_SIZE][MAX_SIZE]; int labels[MAX_SIZE];
+
+
+
+printf("Enter the dataset values:\n"); for (int i = 0; i < dataSize; i++) {
+
+printf("Sample %d:\n", i + 1); for (int j = 0; j < inputSize; j++) {
+
+printf("Input %d: ", j + 1); scanf("%lf", &dataset[i][j]);
+
+}
+
+printf("Label: ");
+
+scanf("%d", &labels[i]);
+
+}
+
+
+
+// Initialize weights to zero double weights[MAX_SIZE] = {0};
+
+
+
+double learningRate;
+
+printf("Enter the learning rate: "); scanf("%lf", &learningRate);
+
+
+
+printf("Enter the maximum number of iterations: "); scanf("%d", &maxIterations);
+
+
+
+// Train the perceptron
+
+train(dataset, labels, weights, learningRate, dataSize, inputSize, maxIterations);
+
+
+
+// Print the weights
+
+ 
+
+printf("The weights are:\n"); for (int i = 0; i < inputSize; i++) {
+
+printf("w%d = %lf\n", i + 1, weights[i]);
+
+}
+
+
+
+// Test the perceptron
+
+printf("Enter a test sample:\n"); double testInput[MAX_SIZE]; for (int i = 0; i < inputSize; i++) {
+
+printf("Input %d: ", i + 1); scanf("%lf", &testInput[i]);
+
+}
+
+int prediction = unitStep(dotProduct(testInput, weights, inputSize)); printf("Prediction: %d\n", prediction);
+
+
+
+return 0;
+
+}
+
