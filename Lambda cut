@@ -1,0 +1,58 @@
+Q.4	Write a program to implement lambda cut
+
+
+
+
+Program:
+
+#include <stdio.h> #define MAX_SIZE 100
+
+// Function to apply Lambda Cut to a fuzzy set void lambdaCut(float set[], int size, float lambda) {
+
+printf("Lambda Cut (λ = %.2f): ", lambda); for (int i = 0; i < size; i++) {
+
+if (set[i] >= lambda) { printf("1 ");
+
+} else {
+
+printf("0 ");
+
+}
+
+}
+
+printf("\n");
+
+}
+
+
+
+int main() {
+
+float fuzzySet[MAX_SIZE]; int size;
+
+float lambda;
+
+
+
+printf("Enter the number of elements in the fuzzy set: "); scanf("%d", &size);
+
+printf("Enter the elements of the fuzzy set (separated by spaces): "); for (int i = 0; i < size; i++) {
+
+scanf("%f", &fuzzySet[i]);
+
+}
+
+
+
+printf("Enter the value of lambda: "); scanf("%f", &lambda);
+
+
+
+lambdaCut(fuzzySet, size, lambda); return 0;
+
+ 
+
+}
+
+
