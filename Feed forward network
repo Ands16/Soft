@@ -1,0 +1,134 @@
+Q.8	Write a program to implement Feed Forward Network.
+
+
+
+
+Progrm:
+
+#include <stdio.h> #include <math.h>
+
+
+
+#define MAX_SIZE 100
+
+
+
+// Activation function (sigmoid) double sigmoid(double x) {
+
+return 1 / (1 + exp(-x));
+
+}
+
+
+
+// Function to calculate the dot product of two vectors
+
+double dotProduct(double inputs[], double weights[], int size) { double result = 0.0;
+
+for (int i = 0; i < size; i++) {
+
+result += inputs[i] * weights[i];
+
+}
+
+return result;
+
+}
+
+
+
+// Feedforward Network function
+
+double feedForward(double inputs[], double hiddenWeights[][MAX_SIZE], double outputWeights[], double hiddenLayer[], int inputSize, int hiddenSize, double *output) {
+
+// Calculate hidden layer activations for (int i = 0; i < hiddenSize; i++) {
+
+double hiddenInput = dotProduct(inputs, hiddenWeights[i], inputSize); hiddenLayer[i] = sigmoid(hiddenInput);
+
+}
+
+
+
+// Calculate output layer activation
+
+double outputInput = dotProduct(hiddenLayer, outputWeights, hiddenSize);
+
+*output = sigmoid(outputInput);
+
+}
+
+
+
+int main() {
+
+int inputSize, hiddenSize;
+
+
+
+printf("Enter the number of input neurons: ");
+
+ 
+
+scanf("%d", &inputSize);
+
+
+
+printf("Enter the number of hidden neurons: "); scanf("%d", &hiddenSize);
+
+
+
+double inputs[MAX_SIZE];
+
+double hiddenWeights[MAX_SIZE][MAX_SIZE]; double outputWeights[MAX_SIZE];
+
+double hiddenLayer[MAX_SIZE]; double output;
+
+
+
+printf("Enter the input values:\n"); for (int i = 0; i < inputSize; i++) {
+
+printf("Input %d: ", i + 1);
+
+scanf("%lf", &inputs[i]);
+
+}
+
+
+
+printf("Enter the hidden layer weights:\n"); for (int i = 0; i < hiddenSize; i++) {
+
+printf("Hidden Neuron %d:\n", i + 1); for (int j = 0; j < inputSize; j++) {
+
+printf("Weight %d: ", j + 1);
+
+scanf("%lf", &hiddenWeights[i][j]);
+
+}
+
+}
+
+
+
+printf("Enter the output layer weights:\n"); for (int i = 0; i < hiddenSize; i++) {
+
+printf("Weight %d: ", i + 1); scanf("%lf", &outputWeights[i]);
+
+}
+
+
+
+feedForward(inputs, hiddenWeights, outputWeights, hiddenLayer, inputSize, hiddenSize, &output);
+
+
+
+printf("Output: %.4lf\n", output);
+
+
+
+return 0;
+
+}
+
+ 
+
+
