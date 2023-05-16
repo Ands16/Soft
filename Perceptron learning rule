@@ -1,0 +1,158 @@
+Q.6	Write a program to implement Perceptron Learning Rule
+
+
+
+
+Program:
+
+#include <stdio.h> #define MAX_SIZE 100
+
+// Function to calculate the dot product of two vectors
+
+double dotProduct(double inputs[], double weights[], int size) { double result = 0.0;
+
+for (int i = 0; i < size; i++) {
+
+result += inputs[i] * weights[i];
+
+}
+
+return result;
+
+}
+
+
+
+// Function to apply the Perceptron Learning Rule
+
+void perceptronLearningRule(double inputs[][MAX_SIZE], double outputs[], double weights[], int numSamples, int numInputs, double learningRate, int maxIterations) {
+
+int iterations = 0; int error;
+
+
+
+do {
+
+error = 0;
+
+for (int i = 0; i < numSamples; i++) { double inputVector[MAX_SIZE]; for (int j = 0; j < numInputs; j++) {
+
+inputVector[j] = inputs[i][j];
+
+}
+
+
+
+double predictedOutput = dotProduct(inputVector, weights, numInputs); int predictedLabel = (predictedOutput > 0) ? 1 : 0;
+
+
+
+int actualLabel = outputs[i];
+
+
+
+if (predictedLabel != actualLabel) { for (int j = 0; j < numInputs; j++) {
+
+weights[j] += learningRate * (actualLabel - predictedLabel) * inputVector[j];
+
+}
+
+ 
+
+error = 1;
+
+}
+
+}
+
+
+
+iterations++;
+
+} while (error && iterations < maxIterations);
+
+
+
+if (iterations == maxIterations) {
+
+printf("Perceptron Learning Rule did not converge within the maximum number of iterations.\n");
+
+} else {
+
+printf("Perceptron Learning Rule converged in %d iterations.\n", iterations); printf("Weights: ");
+
+for (int i = 0; i < numInputs; i++) { printf("%.2lf ", weights[i]);
+
+}
+
+printf("\n");
+
+}
+
+}
+
+
+
+int main() {
+
+int numSamples, numInputs;
+
+
+
+printf("Enter the number of samples: "); scanf("%d", &numSamples);
+
+
+
+printf("Enter the number of inputs: "); scanf("%d", &numInputs);
+
+
+
+double inputs[MAX_SIZE][MAX_SIZE]; double outputs[MAX_SIZE];
+
+double weights[MAX_SIZE] = {0.0};
+
+
+
+printf("Enter the input values for each sample:\n"); for (int i = 0; i < numSamples; i++) {
+
+printf("Sample %d:\n", i + 1);
+
+for (int j = 0; j < numInputs; j++) { scanf("%lf", &inputs[i][j]);
+
+}
+
+}
+
+
+
+printf("Enter the output values for each sample:\n"); for (int i = 0; i < numSamples; i++) {
+
+printf("Sample %d: ", i + 1);
+
+ 
+
+scanf("%lf", &outputs[i]);
+
+}
+
+
+
+double learningRate; int maxIterations;
+
+
+
+printf("Enter the learning rate: "); scanf("%lf", &learningRate);
+
+printf("Enter the maximum number of iterations: "); scanf("%d", &maxIterations);
+
+perceptronLearningRule(inputs, outputs, weights, numSamples, numInputs, learningRate, maxIterations);
+
+
+
+return 0;
+
+}
+
+
+
+
