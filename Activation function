@@ -1,0 +1,39 @@
+Q.5	Write a program to implement Activation Function
+
+
+
+
+
+Program:
+
+#include <stdio.h> #include <math.h>
+
+
+
+// Function to calculate the sigmoid activation double sigmoid(double x) {
+
+return 1 / (1 + exp(-x));
+
+}
+
+
+
+int main() { double input;
+
+
+
+printf("Enter the input value: "); scanf("%lf", &input);
+
+
+
+double result = sigmoid(input);
+
+
+
+printf("Sigmoid Activation: %.4lf\n", result);
+
+
+
+return 0;
+
+}
