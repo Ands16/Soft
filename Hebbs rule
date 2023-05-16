@@ -1,0 +1,78 @@
+Q.7	Write a program to implement Hebb’s Rule
+
+
+
+
+Program:
+
+#include <stdio.h> #define MAX_SIZE 100
+
+// Function to apply Hebb's Rule
+
+void hebbRule(double inputs[][MAX_SIZE], double weights[], int numSamples, int numInputs) {
+
+for (int i = 0; i < numSamples; i++) { for (int j = 0; j < numInputs; j++) {
+
+weights[j] += inputs[i][j] * inputs[i][j];
+
+}
+
+}
+
+}
+
+
+
+int main() {
+
+int numSamples, numInputs;
+
+
+
+printf("Enter the number of samples: "); scanf("%d", &numSamples);
+
+
+
+printf("Enter the number of inputs: "); scanf("%d", &numInputs);
+
+
+
+double inputs[MAX_SIZE][MAX_SIZE];
+
+
+
+printf("Enter the input values for each sample:\n"); for (int i = 0; i < numSamples; i++) {
+
+printf("Sample %d:\n", i + 1);
+
+for (int j = 0; j < numInputs; j++) { scanf("%lf", &inputs[i][j]);
+
+}
+
+}
+
+
+
+double weights[MAX_SIZE] = {0.0};
+
+
+
+hebbRule(inputs, weights, numSamples, numInputs);
+
+ 
+
+printf("Weights: ");
+
+for (int i = 0; i < numInputs; i++) { printf("%.2lf ", weights[i]);
+
+}
+
+printf("\n");
+
+
+
+return 0;
+
+}
+
+
