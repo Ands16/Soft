@@ -1,0 +1,136 @@
+Q.3	Write a program to implement Max-Min Composition and Max-Product Composition.
+
+
+
+
+Program:
+
+#include <stdio.h>
+
+
+
+#define MAX_ROWS 10
+
+#define MAX_COLS 10
+
+
+
+void maxMinComposition(int A[MAX_ROWS][MAX_COLS], int B[MAX_ROWS][MAX_COLS], int result[MAX_ROWS][MAX_COLS], int rows, int cols) {
+
+for (int i = 0; i < rows; i++) { for (int j = 0; j < cols; j++) {
+
+int max = A[i][0] > B[0][j] ? A[i][0] : B[0][j];
+
+for (int k = 1; k < cols; k++) {
+
+int temp = A[i][k] > B[k][j] ? A[i][k] : B[k][j]; max = max < temp ? max : temp;
+
+}
+
+result[i][j] = max;
+
+}
+
+}
+
+}
+
+
+
+void maxProductComposition(int A[MAX_ROWS][MAX_COLS], int
+
+B[MAX_ROWS][MAX_COLS], int result[MAX_ROWS][MAX_COLS], int rows, int cols) { for (int i = 0; i < rows; i++) {
+
+for (int j = 0; j < cols; j++) {
+
+int maxProduct = A[i][0] * B[0][j]; for (int k = 1; k < cols; k++) {
+
+int temp = A[i][k] * B[k][j];
+
+maxProduct = maxProduct > temp ? maxProduct : temp;
+
+}
+
+result[i][j] = maxProduct;
+
+}
+
+}
+
+}
+
+
+
+void printMatrix(int matrix[MAX_ROWS][MAX_COLS], int rows, int cols) { for (int i = 0; i < rows; i++) {
+
+for (int j = 0; j < cols; j++) {
+
+ 
+
+printf("%d ", matrix[i][j]);
+
+}
+
+printf("\n");
+
+}
+
+}
+
+
+
+int main() {
+
+int matrixA[MAX_ROWS][MAX_COLS]; int matrixB[MAX_ROWS][MAX_COLS];
+
+int resultMaxMin[MAX_ROWS][MAX_COLS];
+
+int resultMaxProduct[MAX_ROWS][MAX_COLS]; int rows, cols;
+
+
+
+printf("Enter the number of rows (up to %d): ", MAX_ROWS); scanf("%d", &rows);
+
+printf("Enter the number of columns (up to %d): ", MAX_COLS); scanf("%d", &cols);
+
+
+
+printf("Enter elements of matrix A:\n"); for (int i = 0; i < rows; i++) {
+
+for (int j = 0; j < cols; j++) { scanf("%d", &matrixA[i][j]);
+
+}
+
+}
+
+
+
+printf("Enter elements of matrix B:\n"); for (int i = 0; i < rows; i++) {
+
+for (int j = 0; j < cols; j++) { scanf("%d", &matrixB[i][j]);
+
+}
+
+}
+
+
+
+maxMinComposition(matrixA, matrixB, resultMaxMin, rows, cols);
+
+maxProductComposition(matrixA, matrixB, resultMaxProduct, rows, cols);
+
+
+
+printf("Max-Min Composition:\n");
+
+printMatrix(resultMaxMin, rows, cols);
+
+
+
+printf("\nMax-Product Composition:\n"); printMatrix(resultMaxProduct, rows, cols);
+
+
+
+return 0;
+
+}
