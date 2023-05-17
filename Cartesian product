@@ -1,0 +1,68 @@
+Cartesian Product:
+
+#include <stdio.h> #define MAX_SIZE 100
+
+void fuzzyCartesianProduct(double A[], double B[], double result[], int size) { int index = 0;	for (int i = 0; i < size; i++) {	for (int j = 0; j < size; j++) {
+result[index++] = A[i] * B[j];
+
+}
+
+}
+
+}
+
+
+
+void printFuzzySet(double A[], int size) { for (int i = 0; i < size; i++) {
+
+printf("%.2f ", A[i]);
+
+}
+
+printf("\n");
+
+}
+
+
+
+int main() {
+
+double setA[MAX_SIZE], setB[MAX_SIZE], result[MAX_SIZE]; int size;
+
+
+
+printf("Enter the size of fuzzy sets (up to %d): ", MAX_SIZE); scanf("%d", &size);
+
+
+
+printf("Enter elements of set A:\n"); for (int i = 0; i < size; i++) {
+
+scanf("%lf", &setA[i]);
+
+}
+
+
+
+printf("Enter elements of set B:\n"); for (int i = 0; i < size; i++) {
+
+scanf("%lf", &setB[i]);
+
+}
+
+
+
+printf("Fuzzy Set A: ");
+
+printFuzzySet(setA, size);	printf("Fuzzy Set B: ");
+
+printFuzzySet(setB, size);
+
+ 
+
+fuzzyCartesianProduct(setA, setB, result, size); printf("Fuzzy Cartesian Product: ");
+
+printFuzzySet(result, size);
+
+
+
+}
