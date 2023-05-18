@@ -1,38 +1,26 @@
 Q.2	Write a program to implement De Morgans law
 
-
-
-
-Program :
-
+Program
 #include <stdio.h>
 
+int main() {
 
+int x, y;
 
-int main() { int x, y;
+printf("Enter the values of x and y (0 or 1):\n");
 
+scanf("%d %d", &x, &y);
 
+// Applying De Morgan's Law 
 
-printf("Enter the values of x and y (0 or 1):\n"); scanf("%d %d", &x, &y);
-
-
-
-// Applying De Morgan's Law int notXandY = !(x && y);
+int notXandY = !(x && y);
 
 int notXorNotY = (!x) || (!y);
 
-
-
-printf("Applying De Morgan's Law:\n");
-
-printf("NOT(x AND y) = %d\n", notXandY);
+printf("Applying De Morgan's Law:\n"); printf("NOT(x AND y) = %d\n", notXandY);
 
 printf("NOT(x) OR NOT(y) = %d\n", notXorNotY);
-
-
 
 return 0;
 
 }
-
-
