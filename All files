@@ -344,10 +344,18 @@ Program :
 
 #include <stdio.h>
 
-int main() { int x, y;
-printf("Enter the values of x and y (0 or 1):\n"); scanf("%d %d", &x, &y);
+int main() {
 
-// Applying De Morgan's Law int notXandY = !(x && y);
+int x, y;
+
+printf("Enter the values of x and y (0 or 1):\n");
+
+scanf("%d %d", &x, &y);
+
+// Applying De Morgan's Law 
+
+int notXandY = !(x && y);
+
 int notXorNotY = (!x) || (!y);
 
 printf("Applying De Morgan's Law:\n"); printf("NOT(x AND y) = %d\n", notXandY);
@@ -361,7 +369,6 @@ return 0;
 ****implement Max-Min Composition and Max-Product Composition.
 
 Program:
-
 #include <stdio.h>
 
 #define MAX_ROWS 10
